@@ -1,0 +1,9 @@
+# ignore build products
+**/CMakeFiles
+**/*.cmake
+**/CMakeCache.txt
+**/Makefile
+**/*.exe
+
+# ignore VS Code things
+.vscode
