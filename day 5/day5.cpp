@@ -32,16 +32,13 @@ int main(int argc, char* argv[]) {
     const RulesAndUpdates& rules_and_updates = parser.getParsedInput();
 
     Solver<parts::PART1> part1(rules_and_updates);
-    // Solver<parts::PART2> part2(parsedInput);
+    Solver<parts::PART2> part2(rules_and_updates);
 
     int part1Solution = part1.solve();
-    // int part2Solution = part2.solve();
+    int part2Solution = part2.solve();
 
     std::cout << "Part 1: " << part1Solution << "\n";
-    // std::cout << "Part 2: " << part2Solution << "\n";
-
-
-
+    std::cout << "Part 2: " << part2Solution << "\n";
 
     return 0;
 }
