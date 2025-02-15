@@ -35,10 +35,10 @@ int main(int argc, char* argv[]) {
     Solver<parts::PART2> part2(parsedInput);
 
     int part1Solution = part1.solve();
-    // int part2Solution = part2.solve();
+    int part2Solution = part2.solve();
 
     std::cout << "Part 1: " << part1Solution << "\n";
-    // std::cout << "Part 2: " << part2Solution << "\n";
+    std::cout << "Part 2: " << part2Solution << "\n";
 
     return 0;
 }
