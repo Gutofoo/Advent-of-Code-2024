@@ -15,13 +15,15 @@ class Scene {
 
     Scene(const std::vector<std::vector<GridItem>>& grid_input);
     Scene(const Scene& other);
+    Scene(const unsigned long max_x, const unsigned long max_y, const std::vector<Coordinate>& obstacles, const GuardState& initial_guard_state);
     void Update();
     std::vector<std::string> ToString() const;
     const Coordinate& ReportGuardPosition() const;
+    const std::vector<Coordinate>& GetObstacles() const;
     GuardState ReportGuardState() const;
     bool EndConditionReached() const;
-    inline const unsigned long& GetMaxX() const;
-    inline const unsigned long& GetMaxY() const;
+    inline const unsigned long& GetMaxX() { return MAX_X_; }
+    inline const unsigned long& GetMaxY() { return MAX_Y_; }
 
   private:
 

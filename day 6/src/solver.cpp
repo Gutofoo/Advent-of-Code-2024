@@ -42,4 +42,6 @@ int Solver<parts::PART2>::solve() {
         }
     }
 
+
+    return 0;
 }

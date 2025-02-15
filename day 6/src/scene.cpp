@@ -25,6 +25,20 @@ Scene::Scene(const std::vector<std::vector<GridItem>>& grid_input) :
     }
 }
 
+Scene::Scene(const Scene& other) :
+  MAX_X_(other.MAX_X_),
+  MAX_Y_(other.MAX_Y_),
+  obstacles_(other.obstacles_) {
+    guard_ = std::make_unique<Guard>(Guard(obstacles_, other.ReportGuardPosition()));
+}
+
+Scene::Scene(const unsigned long max_x, const unsigned long max_y, const std::vector<Coordinate>& obstacles, const GuardState& initial_guard_state) :
+  MAX_X_(max_x),
+  MAX_Y_(max_y),
+  obstacles_(obstacles) {
+    guard_ = std::make_unique<Guard>(Guard(obstacles_, initial_guard_state.position));
+}
+
 void Scene::Update() {
 
     guard_->Update();
@@ -51,6 +65,10 @@ GuardState Scene::ReportGuardState() const {
         guard_->GetPosition(),
         guard_->GetHeading()
     };
+}
+
+const std::vector<Coordinate>& Scene::GetObstacles() const {
+    return obstacles_;
 }
 
 std::vector<std::string> Scene::ToString() const {
@@ -83,6 +101,3 @@ std::vector<std::string> Scene::ToString() const {
     return scene_string;
 
 }
-
-inline const unsigned long& Scene::GetMaxX() const { return MAX_X_; }
-inline const unsigned long& Scene::GetMaxY() const { return MAX_Y_; }

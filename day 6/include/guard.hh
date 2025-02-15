@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "coordinate.hh"
+#include "types.hh"
 
 class Guard {
 
