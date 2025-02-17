@@ -32,8 +32,8 @@ int main(int argc, char* argv[]) {
     Solver<Parts::PART1> part_1(parsed_input);
     Solver<Parts::PART2> part_2(parsed_input);
 
-    int part_1_solution = part_1.solve();
-    int part_2_solution = part_2.solve();
+    long part_1_solution = part_1.solve();
+    long part_2_solution = part_2.solve();
 
     std::cout << "Part 1: " << part_1_solution << "\n";
     std::cout << "Part 2: " << part_2_solution << "\n";

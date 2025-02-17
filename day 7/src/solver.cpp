@@ -35,9 +35,9 @@ bool Solver<Parts::PART1>::ProcessEquation(long result, long argument, Operators
 }
 
 template<>
-int Solver<Parts::PART1>::solve() {
+long Solver<Parts::PART1>::solve() {
 
-    int sum = 0;
+    long sum = 0;
 
     for(const CalibrationEquation& current_equation : data_) {
 
@@ -61,8 +61,8 @@ int Solver<Parts::PART1>::solve() {
 }
 
 template<>
-int Solver<Parts::PART2>::solve() {
+long Solver<Parts::PART2>::solve() {
 
-    return 0;
+    return 0L;
 
 }

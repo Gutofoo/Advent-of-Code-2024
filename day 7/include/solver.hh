@@ -9,7 +9,7 @@ class Solver {
   public:
     Solver(const std::vector<CalibrationEquation>& parsed_input) :
       data_(parsed_input) { }
-    int solve();
+    long solve();
 
   private:
     const std::vector<CalibrationEquation>& data_;
