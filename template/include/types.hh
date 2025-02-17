@@ -4,6 +4,6 @@
 #include <array>
 #include <vector>
 
-enum class parts { PART1, PART2 };
+enum class Parts { PART1, PART2 };
 
 #endif

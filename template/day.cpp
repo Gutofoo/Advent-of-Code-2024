@@ -7,8 +7,6 @@
 #include "solver.hh"
 #include "types.hh"
 
-enum Parts {PART1, PART2};
-
 int main(int argc, char* argv[]) {
 
     // file to target taken as command line input; default to "example.txt"
@@ -27,21 +25,18 @@ int main(int argc, char* argv[]) {
     input.close();
 
     // debug: see what was parsed
-    // parser.print();
+    // parser.Print();
 
-    parsed_t parsedInput = parser.getParsedInput();
+    // parsed_t parsedInput = parser.getParsedInput();
 
-    Solver<parts::PART1> part1(parsedInput);
-    Solver<parts::PART2> part2(parsedInput);
+    Solver<Parts::PART1> part_1(parsedInput);
+    Solver<Parts::PART2> part_2(parsedInput);
 
-    int part1Solution = part1.solve();
-    int part2Solution = part2.solve();
+    int part_1_solution = part_1.solve();
+    int part_2_solution = part_2.solve();
 
-    std::cout << "Part 1: " << part1Solution << "\n";
-    std::cout << "Part 2: " << part2Solution << "\n";
-
-
-
+    std::cout << "Part 1: " << part_1_solution << "\n";
+    std::cout << "Part 2: " << part_2_solution << "\n";
 
     return 0;
 }

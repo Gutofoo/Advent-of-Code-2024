@@ -3,7 +3,7 @@
 
 #include "types.hh"
 
-template<parts p>
+template<Parts p>
 class Solver {
 
     public:

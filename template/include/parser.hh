@@ -12,7 +12,7 @@ class Parser {
 
     public:
         Parser(std::fstream&);
-        void print() const;
+        void Print() const;
 
     private:
 
