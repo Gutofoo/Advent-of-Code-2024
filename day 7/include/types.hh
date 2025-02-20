@@ -7,7 +7,8 @@ enum class Parts { PART1, PART2 };
 
 enum class Operators {
     ADD,
-    MULTIPLY
+    MULTIPLY,
+    CONCAT
 };
 
 struct CalibrationEquation {

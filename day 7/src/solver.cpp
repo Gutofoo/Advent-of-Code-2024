@@ -1,36 +1,22 @@
 #include "solver.hh"
 
+#include <string>
 #include <vector>
 
 #include "types.hh"
 
 template<>
-bool Solver<Parts::PART1>::ProcessEquation(long result, long argument, Operators operation, std::vector<long> remaining_args) {
+bool Solver<Parts::PART1>::ProcessEquation(const CalibrationEquation& equation) {
 
-    // base case: no more arguments remaining
-    if(remaining_args.empty()) {
-        return result == argument;
-    }
+    std::vector<long> remaining_args = equation.operands;
+    remaining_args.pop_back();
+    const std::vector<Operators> operations = {
+        Operators::ADD,
+        Operators::MULTIPLY
+    };
 
-    long new_result = result;
-
-    // do an operation based on the Operator
-    switch(operation) {
-    case Operators::ADD:
-        if(result - argument < 0) return false;
-        new_result -= argument;
-        break;
-    case Operators::MULTIPLY:
-        if(result % argument != 0) return false;
-        new_result /= argument;
-    }
-
-    long next_argument = remaining_args.back();
-    std::vector<long> next_args = remaining_args;
-    next_args.pop_back();
-
-    return ProcessEquation(new_result, next_argument, Operators::ADD, next_args)
-      || ProcessEquation(new_result, next_argument, Operators::MULTIPLY, next_args);
+    return ProcessEquation(equation.result, equation.operands.back(), Operators::ADD, operations, remaining_args)
+      || ProcessEquation(equation.result, equation.operands.back(), Operators::MULTIPLY, operations, remaining_args);
 
 }
 
@@ -41,12 +27,7 @@ long Solver<Parts::PART1>::solve() {
 
     for(const CalibrationEquation& current_equation : data_) {
 
-        // process this equation
-        std::vector<long> remaining_args = current_equation.operands;
-        remaining_args.pop_back();
-
-        const bool equation_is_valid = ProcessEquation(current_equation.result, current_equation.operands.back(), Operators::ADD, remaining_args)
-          || ProcessEquation(current_equation.result, current_equation.operands.back(), Operators::MULTIPLY, remaining_args);
+        const bool equation_is_valid = ProcessEquation(current_equation);
 
         if(equation_is_valid) {
             sum += current_equation.result;
@@ -54,15 +35,46 @@ long Solver<Parts::PART1>::solve() {
 
     }
 
-    // 1580289603 is too low!
-
     return sum;
+
+}
+
+template<>
+bool Solver<Parts::PART2>::ProcessEquation(const CalibrationEquation& equation) {
+
+    std::vector<long> remaining_args = equation.operands;
+    remaining_args.pop_back();
+    const std::vector<Operators> operations = {
+        Operators::ADD,
+        Operators::MULTIPLY,
+        Operators::CONCAT
+    };
+
+    return ProcessEquation(equation.result, equation.operands.back(), Operators::ADD, operations, remaining_args)
+      || ProcessEquation(equation.result, equation.operands.back(), Operators::MULTIPLY, operations, remaining_args)
+      || ProcessEquation(equation.result, equation.operands.back(), Operators::CONCAT, operations, remaining_args);
 
 }
 
 template<>
 long Solver<Parts::PART2>::solve() {
 
-    return 0L;
+    long sum = 0;
+
+    for(const CalibrationEquation& current_equation : data_) {
+
+        // process this equation
+        std::vector<long> remaining_args = current_equation.operands;
+        remaining_args.pop_back();
+
+        const bool equation_is_valid = ProcessEquation(current_equation);
+
+        if(equation_is_valid) {
+            sum += current_equation.result;
+        }
+
+    }
+
+    return sum;
 
 }
