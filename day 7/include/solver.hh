@@ -69,4 +69,23 @@ bool Solver<p>::ProcessEquation(long result, long argument, const Operators oper
     return return_value;
 }
 
+template<Parts p>
+long Solver<p>::solve() {
+
+    long sum = 0;
+
+    for(const CalibrationEquation& current_equation : data_) {
+
+        const bool equation_is_valid = ProcessEquation(current_equation);
+
+        if(equation_is_valid) {
+            sum += current_equation.result;
+        }
+
+    }
+
+    return sum;
+
+}
+
 #endif
