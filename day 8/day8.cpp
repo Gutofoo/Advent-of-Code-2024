@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
     input.close();
 
     // debug: see what was parsed
-    parser.Print();
+    // parser.Print();
 
     const Grid& data = parser.GetData();
 

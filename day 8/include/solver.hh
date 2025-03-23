@@ -11,6 +11,7 @@ class Solver {
     Solver(const Grid& parsedInput) :
       data_(parsedInput) { }
     int Solve();
+    void Print();
 
   private:
     const Grid& data_;
