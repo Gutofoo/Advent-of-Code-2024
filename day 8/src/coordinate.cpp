@@ -2,7 +2,7 @@
 
 #include <cstddef>
 
-Coordinate::Coordinate(size_t x, size_t y) :
+Coordinate::Coordinate(int x, int y) :
     x_(x),
     y_(y) {
 }

@@ -16,12 +16,12 @@ Parser::Parser(std::fstream& input) {
     std::vector<Antenna> antennae;
 
     std::string line = "";
-    size_t y = 0;
-    size_t max_x = 0;
+    int y = 0;
+    int max_x = 0;
     while(getline(input, line)) {
         
         max_x = line.length();
-        for(size_t x = 0; x < max_x; x++) {
+        for(int x = 0; x < max_x; x++) {
 
             if(line.at(x) != '.') { // found a frequency
                 Antenna found_antenna = {line.at(x), {x, y}};
@@ -34,7 +34,7 @@ Parser::Parser(std::fstream& input) {
 
     }
 
-    size_t max_y = y;
+    int max_y = y;
 
     data_ = Grid(antennae, max_x, max_y);
 

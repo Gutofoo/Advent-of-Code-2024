@@ -1,6 +1,5 @@
 #include "grid.hh"
 
-#include <cstddef>
 #include <vector>
 
 #include "antenna.hh"
@@ -10,7 +9,7 @@
 Grid::Grid() {
 }
 
-Grid::Grid(const std::vector<Antenna>& antennae, const size_t max_x, const size_t max_y) :
+Grid::Grid(const std::vector<Antenna>& antennae, const int max_x, const int max_y) :
   antennae_(antennae),
   max_x_(max_x),
   max_y_(max_y) {

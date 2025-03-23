@@ -31,16 +31,16 @@ int Solver<Parts::PART1>::Solve() {
                 const Coordinate& position_a = current_antenna_positions[i];
                 const Coordinate& position_b = current_antenna_positions[j];
 
-                const long x_slope = static_cast<long>(position_b.x_) - static_cast<long>(position_a.x_);
-                const long y_slope = static_cast<long>(position_b.y_) - static_cast<long>(position_a.y_);
+                const int x_slope = position_b.x_ - position_a.x_;
+                const int y_slope = position_b.y_ - position_a.y_;
 
                 const Coordinate antinode_1 = {
-                    static_cast<long>(position_a.x_) - x_slope,
-                    static_cast<long>(position_a.y_) - y_slope
+                    position_a.x_ - x_slope,
+                    position_a.y_ - y_slope
                 };
                 const Coordinate antinode_2 = {
-                    static_cast<long>(position_b.x_) + x_slope,
-                    static_cast<long>(position_b.y_) + y_slope
+                    position_b.x_ + x_slope,
+                    position_b.y_ + y_slope
                 };
 
                 // per antinode, add it to the map if it is within bounds
