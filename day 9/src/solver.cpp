@@ -67,14 +67,7 @@ long Solver<Parts::PART2>::solve() {
         size_t file_size = 0;
         size_t file_position = right_position;
         while(true) {
-            // file_position--;
-            // if(data_[file_position] == nullptr) {
-            //     break;
-            // } else if(data_[file_position]->GetId() == data_[right_position]->GetId()) {
-            //     file_size++;
-            // } else {
-            //     break;
-            // }
+            // the "file_position > data_.Size()" is a check that file_position > 0; since it's unsigned it'll wrap if it goes below 0
             if(data_[file_position] == nullptr || file_position > data_.Size()) {
                 break;
             }
