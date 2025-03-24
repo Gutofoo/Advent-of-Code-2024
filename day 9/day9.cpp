@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
     long part_2_solution = part_2.solve();
 
     std::cout << "Part 1: " << part_1_solution << "\n";
-    // std::cout << "Part 2: " << part_2_solution << "\n";
+    std::cout << "Part 2: " << part_2_solution << "\n";
 
     return 0;
 }
