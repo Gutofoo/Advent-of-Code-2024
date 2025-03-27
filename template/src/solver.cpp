@@ -6,14 +6,14 @@
 #include "types.hh"
 
 template<>
-int Solver<Parts::PART1>::solve() {
+int Solver<Parts::PART1>::Solve() {
 
     return 0;
 
 }
 
 template<>
-int Solver<Parts::PART2>::solve() {
+int Solver<Parts::PART2>::Solve() {
 
     return 0;
 

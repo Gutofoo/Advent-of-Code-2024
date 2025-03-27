@@ -16,6 +16,6 @@ Parser::Parser(std::fstream& input) {
 
 }
 
-void Parser::print() const {
+void Parser::Print() const {
 
 }

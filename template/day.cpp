@@ -29,14 +29,14 @@ int main(int argc, char* argv[]) {
 
     // parsed_t parsedInput = parser.getParsedInput();
 
-    Solver<Parts::PART1> part_1(parsedInput);
-    Solver<Parts::PART2> part_2(parsedInput);
+    // Solver<Parts::PART1> part_1(parsedInput);
+    // Solver<Parts::PART2> part_2(parsedInput);
 
-    int part_1_solution = part_1.solve();
-    int part_2_solution = part_2.solve();
+    // int part_1_solution = part_1.Solve();
+    // int part_2_solution = part_2.Solve();
 
-    std::cout << "Part 1: " << part_1_solution << "\n";
-    std::cout << "Part 2: " << part_2_solution << "\n";
+    // std::cout << "Part 1: " << part_1_solution << "\n";
+    // std::cout << "Part 2: " << part_2_solution << "\n";
 
     return 0;
 }
