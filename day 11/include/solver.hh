@@ -8,12 +8,12 @@ template<Parts p>
 class Solver {
 
   public:
-    Solver(Rock& parsedInput) :
+    Solver(const Rock& parsedInput) :
         data_(parsedInput) { }
     unsigned long Solve();
 
   private:
-    Rock& data_;
+    Rock data_;
 
 };
 
