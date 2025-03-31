@@ -10,7 +10,7 @@ class Solver {
   public:
     Solver(Rock& parsedInput) :
         data_(parsedInput) { }
-    int Solve();
+    unsigned long Solve();
 
   private:
     Rock& data_;

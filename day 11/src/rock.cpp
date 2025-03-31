@@ -2,25 +2,36 @@
 
 #include <iostream>
 
-Rock::Rock(unsigned long engraving) :
+Rock::Rock(unsigned long long engraving) :
   engraving_(engraving),
-  multiplicity_(1U),
+  multiplicity_(1UL),
   next_(nullptr) {
 }
 
-Rock::Rock(unsigned long engraving, Rock* next) :
+Rock::Rock(unsigned long long engraving, Rock* next) :
   engraving_(engraving),
-  multiplicity_(1U),
+  multiplicity_(1UL),
   next_(next) {
 }
 
-Rock::Rock(unsigned long engraving, unsigned int multiplicity, Rock* next) :
+Rock::Rock(unsigned long long engraving, unsigned long multiplicity, Rock* next) :
   engraving_(engraving),
   multiplicity_(multiplicity),
   next_(next) {
 }
 
-void Rock::Insert(unsigned long engraving) {
+Rock::Rock(const Rock& other) :
+  engraving_(other.engraving_),
+  multiplicity_(other.multiplicity_) {
+    // deep copy the other Rock, starting from the given one
+    if(other.next_) {
+        this->next_ = new Rock(*other.next_);
+    } else {
+        this->next_ = nullptr;
+    }
+}
+
+void Rock::Insert(unsigned long long engraving) {
     if(next_ == nullptr) {
         next_ = new Rock(engraving);
     } else {
@@ -28,7 +39,7 @@ void Rock::Insert(unsigned long engraving) {
     }
 }
 
-unsigned int Rock::Count() {
+unsigned long Rock::Count() {
     if(next_ == nullptr) {
         return multiplicity_;
     }
@@ -48,8 +59,8 @@ void Rock::Print() {
 void Rock::Blink() {
 
     // Rule 1: if the engraving is 0, it becomes 1
-    if(engraving_ == 0UL) {
-        engraving_ = 1UL;
+    if(engraving_ == 0ULL) {
+        engraving_ = 1ULL;
         if(next_)
             next_->Blink();
     } 
@@ -57,14 +68,14 @@ void Rock::Blink() {
     else if(NumberOfDigits() % 2 == 0) {
 
         int digits = NumberOfDigits();
-        unsigned long divisor = 1;
-        unsigned long temp_engraving = 0UL;
+        unsigned long long divisor = 1;
+        unsigned long long temp_engraving = 0ULL;
         for(int i = 0; i < digits/2; i++) {
-            temp_engraving += ((engraving_/divisor) % 10UL) * divisor;
-            divisor *= 10UL;
+            temp_engraving += ((engraving_/divisor) % 10ULL) * divisor;
+            divisor *= 10ULL;
         }
-        unsigned long left = engraving_/divisor;
-        unsigned long right = temp_engraving;
+        unsigned long long left = engraving_/divisor;
+        unsigned long long right = temp_engraving;
 
         engraving_ = left;
         Rock* temp = next_;
@@ -98,14 +109,14 @@ void Rock::Prune(Rock* head) {
 }
 
 // This method does the pruning
-unsigned int Rock::Prune(unsigned long engraving_to_find, Rock* under_evaluation, Rock* previous) {
+unsigned long Rock::Prune(unsigned long long engraving_to_find, Rock* under_evaluation, Rock* previous) {
 
     // match: prune the current Rock, return its multiplicity plus the Prune value of the rest of the chain
     if(under_evaluation->engraving_ == engraving_to_find) {
 
         // save the important features
         previous->next_ = under_evaluation->next_;
-        unsigned int saved_multiplicity = under_evaluation->multiplicity_;
+        unsigned long saved_multiplicity = under_evaluation->multiplicity_;
 
         // delete the Rock under evaluation, and point to the next in line instead
         delete under_evaluation;
@@ -131,9 +142,9 @@ unsigned int Rock::Prune(unsigned long engraving_to_find, Rock* under_evaluation
 int Rock::NumberOfDigits() {
 
     int digits = 0;
-    unsigned long number = engraving_;
+    unsigned long long number = engraving_;
     while (number) {
-        number /= 10UL;
+        number /= 10ULL;
         digits++;
     }
     return digits;
