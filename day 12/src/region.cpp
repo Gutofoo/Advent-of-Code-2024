@@ -16,6 +16,7 @@ Region::Region(Plant id, const Grid<Plant>& field, const Coordinate& starting_po
 
     CalculateArea();
     CalculatePerimeter();
+    CalculateSides();
 }
 
 void Region::ConstructRegion(std::vector<Coordinate>& visited_points, const Coordinate& point) {
@@ -74,12 +75,12 @@ void Region::CalculateArea() {
 }
 
 void Region::CalculatePerimeter() {
-    for(const Coordinate& current_point : plots_) {
+    for(const Coordinate& plot : plots_) {
         // at each point, see how many adjacent neighbors are in the region
-        const Coordinate left = {current_point.x_-1, current_point.y_};
-        const Coordinate right = {current_point.x_+1, current_point.y_};
-        const Coordinate up = {current_point.x_, current_point.y_-1};
-        const Coordinate down = {current_point.x_, current_point.y_+1};
+        const Coordinate left = {plot.x_-1, plot.y_};
+        const Coordinate right = {plot.x_+1, plot.y_};
+        const Coordinate up = {plot.x_, plot.y_-1};
+        const Coordinate down = {plot.x_, plot.y_+1};
 
         // if the neighboring point is not in the region, then that side of the current point contributes to the perimeter
         if(std::none_of(plots_.begin(), plots_.end(), [left](const Coordinate& element){ return element == left; })) perimeter_++;
@@ -89,10 +90,75 @@ void Region::CalculatePerimeter() {
     }
 }
 
+// for calculating sides, realize number of sides == number of corners
+void Region::CalculateSides() {
+    for(const Coordinate& plot : plots_) {
+
+        const Coordinate left = {plot.x_-1, plot.y_};
+        const Coordinate right = {plot.x_+1, plot.y_};
+        const Coordinate up = {plot.x_, plot.y_-1};
+        const Coordinate down = {plot.x_, plot.y_+1};
+        
+        const Coordinate topleft = {plot.x_-1, plot.y_-1};
+        const Coordinate bottomleft = {plot.x_-1, plot.y_+1};
+        const Coordinate topright = {plot.x_+1, plot.y_-1};
+        const Coordinate bottomright = {plot.x_+1, plot.y_+1};
+        
+        // top left
+        if(std::none_of(plots_.begin(), plots_.end(), [left](const Coordinate& element){ return element == left; })
+          && std::none_of(plots_.begin(), plots_.end(), [up](const Coordinate& element){ return element == up; })) {
+            // convex corner
+            sides_++;
+        } else if(std::any_of(plots_.begin(), plots_.end(), [left](const Coordinate& element){ return element == left; })
+          && std::any_of(plots_.begin(), plots_.end(), [up](const Coordinate& element){ return element == up; })) {
+            // concave corner
+            if(std::none_of(plots_.begin(), plots_.end(), [topleft](const Coordinate& element){ return element == topleft; })) sides_++;
+        }
+
+        // bottom left
+        if(std::none_of(plots_.begin(), plots_.end(), [left](const Coordinate& element){ return element == left; })
+          && std::none_of(plots_.begin(), plots_.end(), [down](const Coordinate& element){ return element == down; })) {
+            // convex corner
+            sides_++;
+        } else if(std::any_of(plots_.begin(), plots_.end(), [left](const Coordinate& element){ return element == left; })
+          && std::any_of(plots_.begin(), plots_.end(), [down](const Coordinate& element){ return element == down; })) {
+            // concave corner
+            if(std::none_of(plots_.begin(), plots_.end(), [bottomleft](const Coordinate& element){ return element == bottomleft; })) sides_++;
+        }
+
+        // top right
+        if(std::none_of(plots_.begin(), plots_.end(), [right](const Coordinate& element){ return element == right; })
+          && std::none_of(plots_.begin(), plots_.end(), [up](const Coordinate& element){ return element == up; })) {
+            // convex corner
+            sides_++;
+        } else if(std::any_of(plots_.begin(), plots_.end(), [right](const Coordinate& element){ return element == right; })
+          && std::any_of(plots_.begin(), plots_.end(), [up](const Coordinate& element){ return element == up; })) {
+            // concave corner
+            if(std::none_of(plots_.begin(), plots_.end(), [topright](const Coordinate& element){ return element == topright; })) sides_++;
+        }
+
+        // bottom right
+        if(std::none_of(plots_.begin(), plots_.end(), [right](const Coordinate& element){ return element == right; })
+          && std::none_of(plots_.begin(), plots_.end(), [down](const Coordinate& element){ return element == down; })) {
+            // convex corner
+            sides_++;
+        } else if(std::any_of(plots_.begin(), plots_.end(), [right](const Coordinate& element){ return element == right; })
+          && std::any_of(plots_.begin(), plots_.end(), [down](const Coordinate& element){ return element == down; })) {
+            // concave corner
+            if(std::none_of(plots_.begin(), plots_.end(), [bottomright](const Coordinate& element){ return element == bottomright; })) sides_++;
+        }
+
+    }
+}
+
 unsigned int Region::GetArea() const {
     return area_;
 }
 
 unsigned int Region::GetPerimeter() const {
     return perimeter_;
+}
+
+unsigned int Region::GetSides() const {
+    return sides_;
 }
