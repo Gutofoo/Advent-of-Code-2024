@@ -12,7 +12,7 @@ class Solver {
   public:
     Solver(const std::vector<Claw>& parsedInput) :
         data_(parsedInput) { }
-    unsigned int Solve();
+    unsigned long Solve();
 
   private:
     const std::vector<Claw>& data_;

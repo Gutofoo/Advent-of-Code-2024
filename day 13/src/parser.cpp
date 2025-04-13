@@ -22,21 +22,21 @@ Parser::Parser(std::fstream& input) {
         // parse Button A
         std::string a_x_string = line.substr(line.find("X+")+2, line.find(",")-(line.find("X+")+2));
         std::string a_y_string = line.substr(line.find("Y+")+2);
-        Slope a_slope = {std::stoi(a_x_string), std::stoi(a_y_string)};
+        Slope a_slope = {std::stol(a_x_string), std::stol(a_y_string)};
 
         getline(input, line);
 
         // parse Button B
         std::string b_x_string = line.substr(line.find("X+")+2, line.find(",")-(line.find("X+")+2));
         std::string b_y_string = line.substr(line.find("Y+")+2);
-        Slope b_slope = {std::stoi(b_x_string), std::stoi(b_y_string)};
+        Slope b_slope = {std::stol(b_x_string), std::stol(b_y_string)};
 
         getline(input, line);
 
         // parse the prize
         std::string prize_x_string = line.substr(line.find("X=")+2, line.find(",")-(line.find("X=")+2));
         std::string prize_y_string = line.substr(line.find("Y=")+2);
-        Position prize_position = {std::stoi(prize_x_string), std::stoi(prize_y_string)};
+        Position prize_position = {std::stol(prize_x_string), std::stol(prize_y_string)};
 
         data_.emplace_back(Claw(a_slope, b_slope, prize_position));
 

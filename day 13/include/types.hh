@@ -4,14 +4,14 @@
 enum class Parts { PART1, PART2 };
 
 struct Vector2D {
-    int x = 0;
-    int y = 0;
+    long x = 0;
+    long y = 0;
 };
 
 using Position = Vector2D;
 using Slope = Vector2D;
 
-const int A_TOKEN_COST = 3;
-const int B_TOKEN_COST = 1;
+const long A_TOKEN_COST = 3;
+const long B_TOKEN_COST = 1;
 
 #endif
