@@ -9,7 +9,7 @@ class Solver {
   public:
     Solver(const parsed_t& parsedInput) :
         data(parsedInput) { }
-    int Solve();
+    unsigned int Solve();
 
   private:
 
