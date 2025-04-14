@@ -8,10 +8,11 @@ class Solver {
 
   public:
     Solver(const parsed_t& parsedInput) :
-        data(parsedInput) { }
+        data_(parsedInput) { }
     unsigned int Solve();
 
   private:
+    const parsed_t& data_;
 
 };
 

@@ -1,5 +1,3 @@
-#include <algorithm>
-#include <array>
 #include <vector>
 
 #include "solver.hh"
