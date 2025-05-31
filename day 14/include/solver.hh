@@ -18,6 +18,7 @@ class Solver {
 
   private:
     std::vector<Robot> robots_;
+    unsigned int SafetyScore();
     void Print() const;
 
 };
@@ -73,6 +74,32 @@ void Solver<p>::Print() const {
         std::cout << print_frame[y] << "\n";
     }
     std::cout << "\n";
+
+}
+
+template<Parts p>
+unsigned int Solver<p>::SafetyScore() {
+
+    unsigned int top_left = 0U;
+    unsigned int top_right = 0U;
+    unsigned int bottom_left = 0U;
+    unsigned int bottom_right = 0U;
+
+    for(const Robot& robot : robots_) {
+        const Position& position = robot.GetPosition();
+
+        if(position.x < MAX_WIDTH/2 && position.y < MAX_HEIGHT/2) {
+            top_left++;
+        } else if(position.x >= (MAX_WIDTH/2) + 1 && position.y < MAX_HEIGHT/2) {
+            top_right++;
+        }else if(position.x < MAX_WIDTH/2 && position.y >= (MAX_HEIGHT/2) + 1) {
+            bottom_left++;
+        } else if(position.x >= (MAX_WIDTH/2) + 1 && position.y >= (MAX_HEIGHT/2) + 1) {
+            bottom_right++;
+        }
+    }
+
+    return top_left * top_right * bottom_left * bottom_right;
 
 }
 

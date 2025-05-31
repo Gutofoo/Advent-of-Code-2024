@@ -3,10 +3,10 @@
 
 enum class Parts { PART1, PART2 };
 
-const int MAX_WIDTH = 101;
-const int MAX_HEIGHT = 103;
-// const int MAX_WIDTH = 11;
-// const int MAX_HEIGHT = 7;
+// Treat as const
+// these are set at runtime based on whether it is the example or the real input
+extern int MAX_WIDTH;
+extern int MAX_HEIGHT;
 
 struct Vector2D {
     int x;
