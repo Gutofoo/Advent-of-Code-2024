@@ -7,3 +7,6 @@
 
 # ignore VS Code things
 .vscode
+
+# ignore input files
+**/input/*.txt
